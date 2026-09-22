@@ -1,0 +1,6 @@
+Output:
+
+Row-major order   : 33377  347898375840389362
+Column-major order: 135850 347898375840389362
+
+A reason for the time difference is that the row-major order iterator has very linear movement with few calculations needed and very small jumps between memory locations, whereas the column-major order iterator is constantly making large jumps between different positions in memory and requires several calculations at each step.
