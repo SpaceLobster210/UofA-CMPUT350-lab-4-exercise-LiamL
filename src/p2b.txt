@@ -1,0 +1,6 @@
+Output:
+
+A: 131224
+B: 2374036
+
+The calculation of B is the same as for A except for the key difference that B is calling morton3d every time it needs to calculate an index, which makes the calculation take longer.

@@ -5,24 +5,17 @@
 #include <cstdint>
 
 constexpr int K = 64;
+constexpr uint64_t mask = 0b0001ull;
 
-
-uint64_t mortonAddToOutput(uint64_t output, uint64_t value, size_t position, int shift) {
-    uint64_t addValue = (value << position) & 0b0001ull;
-    output += addValue << shift;
-    value = value >> 1;
-    return output;
-}
 
 inline uint64_t morton3d(uint64_t x, uint64_t y, uint64_t z) {
     uint64_t output = 0b0000ull;
     for (size_t i = 0; i < K; i += 3) {
-        output = mortonAddToOutput(output, x, i, 0);
-        if (i+1 >= K) { break; }
-        output = mortonAddToOutput(output, y, i, 1);
-        if (i+2 >= k) { break; }
-        output = mortonAddToOutput(output, z, i, 2);
+        output += ((x >> (i / 3)) & mask) << (i);
+        output += ((y >> (i / 3)) & mask) << (i + 1);
+        output += ((z >> (i / 3)) & mask) << (i + 2);
     }
+    return output;
 }
 
 #endif  // P2A_H
